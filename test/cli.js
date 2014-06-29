@@ -34,6 +34,8 @@ var sampleCssMapOutputPath = path.join(__dirname, '../sample.css.map');
 describe('cli', function() {
   it('should print help when run with no arguments', function(done) {
     exec('node ' + cliPath, function(err, stdout, stderr) {
+      console.log('stdout', stdout.indexOf('Compile .scss files with node-sass'));
+      console.log('stderr', stderr.indexOf('Compile .scss files with node-sass'));
       done(assert(stderr.indexOf('Compile .scss files with node-sass') === 0));
     });
   });
@@ -54,7 +56,7 @@ describe('cli', function() {
   });
 
   it('should compile sample.scss to ../out.css', function(done) {
-    var resultPath = path.resolve(__dirname, '../out.css');
+    var resultPath = path.join(__dirname, '../out.css');
 
     exec('node ' + cliPath + ' ' + sampleFilename + ' ../out.css', {
       cwd: __dirname
